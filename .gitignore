@@ -1,0 +1,5 @@
+/venv
+/utils/__pycache__
+test.py
+utils/dbmanage/__pycache__
+task.txt
