@@ -32,10 +32,17 @@ class Client_Cars(BaseModel):
     cars_id = ForeignKeyField(Cars)
 
 
+class Subservice(BaseModel):
+    title = CharField()
+    
+
+class CarClass(BaseModel):
+    class_title = CharField()
+
 class Price(BaseModel):
     pass
     
 
 db.connect()
-db.create_tables([Clients, Services])
+db.create_tables([Clients, Services, Subservice, CarClass])
 
