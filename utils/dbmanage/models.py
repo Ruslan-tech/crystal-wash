@@ -16,5 +16,26 @@ class Clients(BaseModel):
     user_name = CharField(max_length=50)
 
 
+class Services(BaseModel):
+    title = CharField(max_length=80)
+    
+    
+class Cars(BaseModel):
+    mark = CharField()
+    model = CharField()
+    color =  CharField(max_length=15)
+    num = CharField(max_length=10)
+
+
+class Client_Cars(BaseModel):
+    user_id = ForeignKeyField(Clients)
+    cars_id = ForeignKeyField(Cars)
+
+
+class Price(BaseModel):
+    pass
+    
+
 db.connect()
-db.create_tables([Clients])
+db.create_tables([Clients, Services])
+
