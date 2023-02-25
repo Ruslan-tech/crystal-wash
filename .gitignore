@@ -3,3 +3,6 @@
 test.py
 utils/dbmanage/__pycache__
 task.txt
+/__pycache__
+handlers/__pycache__
+keyboards/__pycache__

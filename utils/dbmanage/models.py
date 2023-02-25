@@ -17,4 +17,4 @@ class Clients(BaseModel):
 
 
 db.connect()
-db.create_tables([])
+db.create_tables([Clients])
