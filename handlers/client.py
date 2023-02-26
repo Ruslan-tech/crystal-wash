@@ -14,7 +14,7 @@ async def start_welcome(message: types.message):
         await bot.send_message(message.from_user.id, text=f"Hello! {message.from_user.username}", 
                             reply_markup=welcome_mrkup)
     else:
-        await bot.send_message(message.from_user.id, text="Если нужна помощь, нажми /help")
+        await bot.send_message(message.from_user.id, text="Если нужна помощь, нажми1 /help")
     
     
 @dp.callback_query_handler(text="go_wash")
