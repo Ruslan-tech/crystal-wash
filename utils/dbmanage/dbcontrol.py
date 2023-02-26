@@ -17,13 +17,18 @@ def client_exists(user_tg_id: int) -> bool:
     """return True if user exists"""
     try:
         query = Clients.select().where(Clients.user_tg_id == user_tg_id).count()
-        print(query)
+        
         # master_ex = query.dicts().execute()
         return query > 0
     except Exception as ex:
         logger.exception('error in searching for an existing user in the database', ex)
         
-        
+
+def delete_client(user_tg_id: int) -> None:
+    """delete user from db"""
+    delite = Clients.delete().where(Clients.user_tg_id == user_tg_id)
+    delite.execute()
+    
 # def get_user_id(user_tg_id: int) -> int:
 #     """return user id from db"""
 #     try:

@@ -39,10 +39,13 @@ class Subservice(BaseModel):
 class CarClass(BaseModel):
     class_title = CharField()
 
-class Price(BaseModel):
-    pass
-    
+
+class Price_wash(BaseModel):
+    car_class_id = ForeignKeyField(CarClass)
+    sub_serv_id = ForeignKeyField(Subservice)
+    price = IntegerField()    
+    comments = CharField(null=True)
 
 db.connect()
-db.create_tables([Clients, Services, Subservice, CarClass])
+db.create_tables([Clients, Services, Subservice, CarClass, Price_wash])
 
