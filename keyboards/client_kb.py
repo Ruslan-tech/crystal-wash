@@ -9,18 +9,18 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemo
 
 """Выбор клиентов записи или прайса"""
 welcome_mrkup = InlineKeyboardMarkup(row_width=2)
-welcome_price = InlineKeyboardButton(text='Цены на услуги', callback_data='car_mrkup')
-welcome_wash = InlineKeyboardButton(text='Записаться', callback_data='go_wash')
+welcome_price = InlineKeyboardButton(text="Цены на услуги", callback_data="car_mrkup")
+welcome_wash = InlineKeyboardButton(text="Записаться", callback_data="go_wash")
 welcome_mrkup.add(welcome_price, welcome_wash)
 
 #Категория автомобиля
 car_mrkup = InlineKeyboardMarkup(row_width=1)
-car_cat_1 = InlineKeyboardButton(text='Седан', callback_date='1')
-car_cat_2 = InlineKeyboardButton(text='Кроссовер', callback_date='2')
-car_cat_3 = InlineKeyboardButton(text='Внедорожник', callback_date='3')
-car_cat_4 = InlineKeyboardButton(text='Минивен', callback_date='4')
+car_cat_sed = InlineKeyboardButton(text="Седан", callback_data="sedan")
+car_cat_cros = InlineKeyboardButton(text="Кроссовер", callback_data="crossover")
+car_cat_vned = InlineKeyboardButton(text="Внедорожник", callback_data="vnedorojnik")
+car_cat_minv = InlineKeyboardButton(text="Минивен", callback_data="minivan")
 #car_cat = ReplyKeyboardMarkup(resize_keyboard = True).add(car_cat_1, car_cat_2, car_cat_3, car_cat_4)
-car_mrkup.add(car_cat_1, car_cat_2, car_cat_3, car_cat_4)
+car_mrkup.add(car_cat_sed, car_cat_cros, car_cat_vned, car_cat_minv)
 
 
 

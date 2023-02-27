@@ -1,4 +1,4 @@
-from .models import Clients
+from .models import Clients, Price_wash
 from py_log import *
 import datetime
 
@@ -29,6 +29,13 @@ def delete_client(user_tg_id: int) -> None:
     delite = Clients.delete().where(Clients.user_tg_id == user_tg_id)
     delite.execute()
     
+    
+def get_price(car_class: int, subserv: int):
+    query = Price_wash.select(Price_wash.price).where((Price_wash.car_class_id == car_class) & (Price_wash.sub_serv_id == subserv))
+    pr = query.dicts().execute()
+    print([p for p in pr][0]['price'])
+    return [p for p in pr]
+
 # def get_user_id(user_tg_id: int) -> int:
 #     """return user id from db"""
 #     try:
