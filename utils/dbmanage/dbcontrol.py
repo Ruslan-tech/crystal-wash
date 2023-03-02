@@ -31,7 +31,7 @@ def get_price_wash(car_class: int):
     """Get price for service"""
     query = Price_wash.select(Subservice.title, Price_wash.price).join(Subservice).where(Price_wash.car_class_id == car_class)
     pr = query.dicts().execute()
-    [print(p['title'] + " - " + str(p['price']) + " rub") for p in pr]
-    return [p for p in pr]
+    # [print(p['title'] + " - " + str(p['price']) + " rub") for p in pr]
+    return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
 
 

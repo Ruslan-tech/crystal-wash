@@ -15,19 +15,42 @@ welcome_mrkup.add(welcome_price, welcome_wash)
 
 #Категория автомобиля
 car_mrkup = InlineKeyboardMarkup(row_width=1)
-car_cat_sed = InlineKeyboardButton(text="Седан", callback_data="2")
-car_cat_cros = InlineKeyboardButton(text="Кроссовер", callback_data="3")
-car_cat_vned = InlineKeyboardButton(text="Внедорожник", callback_data="4")
-car_cat_minv = InlineKeyboardButton(text="Минивен", callback_data="5")
+car_cat_sed = InlineKeyboardButton(text="Седан", callback_data="sedan")
+car_cat_cros = InlineKeyboardButton(text="Кроссовер", callback_data="cross")
+car_cat_vned = InlineKeyboardButton(text="Внедорожник", callback_data="vned")
+car_cat_minv = InlineKeyboardButton(text="Минивен", callback_data="van")
 #car_cat = ReplyKeyboardMarkup(resize_keyboard = True).add(car_cat_1, car_cat_2, car_cat_3, car_cat_4)
 car_mrkup.add(car_cat_sed, car_cat_cros, car_cat_vned, car_cat_minv)
 
 # Выбор услуги
-price_mrkup = InlineKeyboardMarkup(row_width=1)
-price_wash = InlineKeyboardButton(text="МОЙКА", callback_data="moika")
-price_polish = InlineKeyboardButton(text="ПОЛИРОВКА", callback_data="polish")
-price_liq_glass = InlineKeyboardButton(text="ЖИДКОЕ СТЕКЛО", callback_data="liq_glass")
-price_dry_cleaner = InlineKeyboardButton(text="ХИМЧИСТКА", callback_data="dry_cleaner")
-price_presale = InlineKeyboardButton(text="ПРЕДПРОДАЖНАЯ ПОДГОТОВКА", callback_data="presale")
-price_prot_cover = InlineKeyboardButton(text="ЗАЩИТНЫЕ ПОКРЫТИЯ", callback_data="prot_cover")
-price_mrkup.add(price_wash, price_polish, price_liq_glass, price_dry_cleaner, price_presale, price_prot_cover)
+price_mrkup_sedan = InlineKeyboardMarkup(row_width=1)
+price_wash_sedan = InlineKeyboardButton(text="МОЙКА", callback_data="moika_sedan")
+price_polish_sedan = InlineKeyboardButton(text="ПОЛИРОВКА", callback_data="polish_sedan")
+price_liq_glass_sedan = InlineKeyboardButton(text="ЖИДКОЕ СТЕКЛО", callback_data="liq_glass_sedan")
+price_dry_cleaner_sedan = InlineKeyboardButton(text="ХИМЧИСТКА", callback_data="dry_cleaner_sedan")
+price_presale_sedan = InlineKeyboardButton(text="ПРЕДПРОДАЖНАЯ ПОДГОТОВКА", callback_data="presale_sedan")
+price_prot_cover_sedan = InlineKeyboardButton(text="ЗАЩИТНЫЕ ПОКРЫТИЯ", callback_data="prot_cover_sedan")
+price_mrkup_sedan.add(price_wash_sedan, price_polish_sedan, price_liq_glass_sedan, price_dry_cleaner_sedan, price_presale_sedan, price_prot_cover_sedan)
+
+
+serv = {"МОЙКА": "moika", "ПОЛИРОВКА": "polish", "ЖИДКОЕ СТЕКЛО": "liq_glass", "ХИМЧИСТКА": "dry_cleaner", 
+        "ПРЕДПРОДАЖНАЯ ПОДГОТОВКА": "presale", "ЗАЩИТНЫЕ ПОКРЫТИЯ": "prot_cover"}
+
+
+def create_btn_mrkup_services(car_class: str):
+    mrkup = InlineKeyboardMarkup(row_width=2)
+    for k, v in serv.items():
+        btn = InlineKeyboardButton(text=f"{k}", callback_data=f"{v}_{car_class}")
+        print(f"{v}_{car_class}")
+        mrkup.add(btn)
+    return mrkup
+
+
+def create_btn(lst):
+    mrkup = InlineKeyboardMarkup(row_width=2, resize_keyboard=True)
+    i = 0
+    for el in lst:
+        btn = InlineKeyboardButton(text=f"{el}", callback_data=f"{i + 1}")
+        i += 1
+        mrkup.add(btn)
+    return mrkup
