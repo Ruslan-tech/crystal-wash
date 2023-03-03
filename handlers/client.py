@@ -45,7 +45,6 @@ async def get_services_wash_car(callback: types.CallbackQuery):
     elif callback.data in cars_service_types.keys():
         await callback.message.answer(text=f"Цены на услугу МОЙКА {[v for v in cars_service_types.get(callback.data).values()][0]}а", 
                                       reply_markup=create_btn(get_price_wash([k for k in cars_service_types.get(callback.data).keys()][0])))
-
    
 
 @dp.message_handler(commands=['quit'])

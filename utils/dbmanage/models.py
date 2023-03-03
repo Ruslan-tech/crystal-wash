@@ -2,8 +2,7 @@ import os
 from peewee import *
 
 
-db = PostgresqlDatabase('crystal-db', user='postgres', password='crystal23',
-                           host='localhost', port=5433)
+db = SqliteDatabase('crystal-db.db')
 
 
 class BaseModel(Model):
@@ -36,6 +35,18 @@ class Subservice(BaseModel):
     title = CharField()
     
 
+class SubservicePolish(BaseModel):
+    title = CharField()
+
+
+class SubserviceDryCleaner(BaseModel):
+    title = CharField()
+
+
+class SubserviceProtCover(BaseModel):
+    title = CharField()
+    
+    
 class CarClass(BaseModel):
     class_title = CharField()
 
@@ -45,7 +56,30 @@ class Price_wash(BaseModel):
     sub_serv_id = ForeignKeyField(Subservice)
     price = IntegerField()    
     comments = CharField(null=True)
+    
+    
+class PricePolish(BaseModel):
+    car_class_id = ForeignKeyField(CarClass)
+    sub_serv_id = ForeignKeyField(SubservicePolish)
+    price = IntegerField()    
+    comments = CharField(null=True)
+    
+    
+class PriceDryCleaner(BaseModel):
+    car_class_id = ForeignKeyField(CarClass)
+    sub_serv_id = ForeignKeyField(SubserviceDryCleaner)
+    price = IntegerField()    
+    comments = CharField(null=True)
 
+
+class PriceProtCover(BaseModel):
+    car_class_id = ForeignKeyField(CarClass)
+    sub_serv_id = ForeignKeyField(SubserviceProtCover)
+    price = IntegerField()    
+    comments = CharField(null=True)
+    
+    
 db.connect()
-db.create_tables([Clients, Services, Subservice, CarClass, Price_wash])
+db.create_tables([Clients, Services, Subservice, SubservicePolish, SubserviceDryCleaner, 
+                  SubserviceProtCover, CarClass, Price_wash, PricePolish, PriceDryCleaner, PriceProtCover])
 
