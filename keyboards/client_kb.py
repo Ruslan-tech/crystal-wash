@@ -15,10 +15,10 @@ welcome_mrkup.add(welcome_price, welcome_wash)
 
 #Категория автомобиля
 car_mrkup = InlineKeyboardMarkup(row_width=1)
-car_cat_sed = InlineKeyboardButton(text="Седан", callback_data="sedan")
-car_cat_cros = InlineKeyboardButton(text="Кроссовер", callback_data="cross")
-car_cat_vned = InlineKeyboardButton(text="Внедорожник", callback_data="vned")
-car_cat_minv = InlineKeyboardButton(text="Минивен", callback_data="van")
+car_cat_sed = InlineKeyboardButton(text="СЕДАН", callback_data="sedan")
+car_cat_cros = InlineKeyboardButton(text="КРОССОВЕР", callback_data="cross")
+car_cat_vned = InlineKeyboardButton(text="ВНЕДОРОЖНИК", callback_data="vned")
+car_cat_minv = InlineKeyboardButton(text="МИКРОАВТОБУС", callback_data="microbus")
 #car_cat = ReplyKeyboardMarkup(resize_keyboard = True).add(car_cat_1, car_cat_2, car_cat_3, car_cat_4)
 car_mrkup.add(car_cat_sed, car_cat_cros, car_cat_vned, car_cat_minv)
 
@@ -33,16 +33,24 @@ price_prot_cover_sedan = InlineKeyboardButton(text="ЗАЩИТНЫЕ ПОКРЫ�
 price_mrkup_sedan.add(price_wash_sedan, price_polish_sedan, price_liq_glass_sedan, price_dry_cleaner_sedan, price_presale_sedan, price_prot_cover_sedan)
 
 
-serv = {"МОЙКА": "moika", "ПОЛИРОВКА": "polish", "ЖИДКОЕ СТЕКЛО": "liq_glass", "ХИМЧИСТКА": "dry_cleaner", 
-        "ПРЕДПРОДАЖНАЯ ПОДГОТОВКА": "presale", "ЗАЩИТНЫЕ ПОКРЫТИЯ": "prot_cover"}
+def create_btn_liquid_glass(title: str, price: int, clback: str):
+    price_liquid_glass_mrkup = InlineKeyboardMarkup(row_width=1)
+    btn_liquid_glass = InlineKeyboardButton(text=f"{title} - от {price} руб.", callback_data=f"{clback}")
+    price_liquid_glass_mrkup.add(btn_liquid_glass)
+    return price_liquid_glass_mrkup
+
+
+serv = {"МОЙКА": "moika", "ПОЛИРОВКА": "polish", "ХИМЧИСТКА": "dry_cleaner", "ЗАЩИТНЫЕ ПОКРЫТИЯ": "prot_cover"}
 
 
 def create_btn_mrkup_services(car_class: str):
-    mrkup = InlineKeyboardMarkup(row_width=2)
+    mrkup = InlineKeyboardMarkup(row_width=1)
     for k, v in serv.items():
         btn = InlineKeyboardButton(text=f"{k}", callback_data=f"{v}_{car_class}")
-        print(f"{v}_{car_class}")
         mrkup.add(btn)
+    btn_liq = InlineKeyboardButton(text="ЖИДКОЕ СТЕКЛО", callback_data="liq_glass")
+    btn_presale = InlineKeyboardButton(text="ПРЕДПРОДАЖНАЯ ПОДГОТОВКА", callback_data="presale")
+    mrkup.add(btn_liq, btn_presale)
     return mrkup
 
 
@@ -53,4 +61,6 @@ def create_btn(lst):
         btn = InlineKeyboardButton(text=f"{el}", callback_data=f"{i + 1}")
         i += 1
         mrkup.add(btn)
+    btn_back = InlineKeyboardButton(text="Вернуться к выбору типа авто -->", callback_data="car_mrkup")
+    mrkup.add(btn_back)
     return mrkup

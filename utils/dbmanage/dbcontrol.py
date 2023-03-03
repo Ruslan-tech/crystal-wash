@@ -1,4 +1,5 @@
-from .models import Clients, Price_wash, CarClass, Subservice
+from .models import Clients, Price_wash, CarClass, Subservice, PricePolish, SubservicePolish, SubserviceDryCleaner, \
+PriceDryCleaner, PriceProtCover, SubserviceProtCover, PriceLiquidGlass, Services
 from py_log import *
 import datetime
 
@@ -31,7 +32,32 @@ def get_price_wash(car_class: int):
     """Get price for service"""
     query = Price_wash.select(Subservice.title, Price_wash.price).join(Subservice).where(Price_wash.car_class_id == car_class)
     pr = query.dicts().execute()
-    # [print(p['title'] + " - " + str(p['price']) + " rub") for p in pr]
     return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
 
 
+def get_price_polish(car_class: int):
+    """Get price for service"""
+    query = PricePolish.select(SubservicePolish.title, PricePolish.price).join(SubservicePolish).where(PricePolish.car_class_id == car_class)
+    pr = query.dicts().execute()
+    return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+
+
+def get_price_dry_cleaner(car_class: int):
+    """Get price for service"""
+    query = PriceDryCleaner.select(SubserviceDryCleaner.title, PriceDryCleaner.price).join(SubserviceDryCleaner).where(PriceDryCleaner.car_class_id == car_class)
+    pr = query.dicts().execute()
+    return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+
+
+def get_price_prot_cover(car_class: int):
+    """Get price for service"""
+    query = PriceProtCover.select(SubserviceProtCover.title, PriceProtCover.price).join(SubserviceProtCover).where(PriceProtCover.car_class_id == car_class)
+    pr = query.dicts().execute()
+    return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+
+
+def get_price_liquid_glass(service_id: int):
+    """Get price for service"""
+    query = PriceLiquidGlass.select(Services.title, PriceLiquidGlass.price).join(Services).where(PriceLiquidGlass.service_id == service_id)
+    pr = query.dicts().execute()
+    return [f"{str(p['price'])}" for p in pr][0]
