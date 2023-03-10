@@ -11,6 +11,10 @@ idna==3.4
 magic-filter==1.0.9
 multidict==6.0.4
 peewee==3.15.4
+psycopg2-binary==2.9.5
+pypng==0.20220715.0
 python-dotenv==0.21.1
 pytz==2022.7.1
+qrcode==7.4.2
+typing_extensions==4.5.0
 yarl==1.8.2
