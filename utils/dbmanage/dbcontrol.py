@@ -37,18 +37,32 @@ def delete_client(user_tg_id: int) -> None:
     delite.execute()
     
     
+# def get_price_wash(car_class: int):
+#     """Get price for service"""
+#     query = Price_wash.select(Subservice.title, Price_wash.price).join(Subservice).where(Price_wash.car_class_id == car_class)
+#     pr = query.dicts().execute()
+#     return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+
+
+# def get_price_polish(car_class: int):
+#     """Get price for service"""
+#     query = PricePolish.select(SubservicePolish.title, PricePolish.price).join(SubservicePolish).where(PricePolish.car_class_id == car_class)
+#     pr = query.dicts().execute()
+#     return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+
+
 def get_price_wash(car_class: int):
     """Get price for service"""
     query = Price_wash.select(Subservice.title, Price_wash.price).join(Subservice).where(Price_wash.car_class_id == car_class)
     pr = query.dicts().execute()
-    return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+    return [f"{str(p['price'])}" for p in pr]
 
 
 def get_price_polish(car_class: int):
     """Get price for service"""
     query = PricePolish.select(SubservicePolish.title, PricePolish.price).join(SubservicePolish).where(PricePolish.car_class_id == car_class)
     pr = query.dicts().execute()
-    return [f"{p['title']} - {str(p['price'])} руб" for p in pr]
+    return [f"{str(p['price'])}" for p in pr]
 
 
 def get_price_dry_cleaner(car_class: int):

@@ -134,11 +134,44 @@ async def get_services_wash_car(callback: types.CallbackQuery):
         await callback.message.answer(text=f"Выберите услугу для {cars_types.get(callback.data)}а", 
                                       reply_markup=create_btn_mrkup_services(callback.data))
     elif callback.data in cars_service_types.keys():
-        await callback.message.answer(text=f"Цены на услугу МОЙКА {[v for v in cars_service_types.get(callback.data).values()][0]}а", 
-                                      reply_markup=create_btn(get_price_wash([k for k in cars_service_types.get(callback.data).keys()][0])))
+        coast_mojka = get_price_wash([k for k in cars_service_types.get(callback.data).keys()][0])
+        await callback.message.answer(text=f"<u>Цены 💰 на услугу <b>МОЙКА {[v for v in cars_service_types.get(callback.data).values()][0]}а</b></u> \n\
+            \n🚰 Технологическая мойка - {coast_mojka[0]} рублей \
+            \n🚰 Технологическая мойка + шампунь - {coast_mojka[1]} рублей \
+            \n💧 Мойка кузова (шампунь + сушка) - {coast_mojka[2]} рублей \
+            \n💧 Мойка СТАНДАРТ (+ мытье ковров) - {coast_mojka[3]} рублей \
+            \n💧 Мойка «LUX Express» - {coast_mojka[4]} рублей \
+            \n💧 Мойка «LUX Classic» - {coast_mojka[5]} рублей \
+            \n💧 Мойка «Premium» - {coast_mojka[6]} рублей \
+            \n💧 Мойка «Premium Extra» - {coast_mojka[7]} рублей \
+            \n🧹 Уборка салона - {coast_mojka[8]} рублей \
+            \n🧹 Удаление насекомых - {coast_mojka[9]} рублей \
+            \n🧹 Уборка шерсти - {coast_mojka[10]} рублей \
+            \n🧹 Уборка салона пылесосом - {coast_mojka[11]} рублей \
+            \n🧹 Очистка стекол в салоне - {coast_mojka[12]} рублей \
+            \n🧹 Очистка пластика в салоне - {coast_mojka[13]} рублей \
+            \n🧹 Уборка багажника - {coast_mojka[14]} рублей \
+            \n🧹 Обезжиривание кузова «ANTI OIL» - {coast_mojka[15]} рублей \
+            \n🧹 Удаление битумных пятен - {coast_mojka[16]} рублей \
+            \n💧 Кондиционер кожи Luxe - {coast_mojka[17]} рублей \
+            \n💧 Кондиционер кожи Premium - {coast_mojka[18]} рублей \
+            \n💧 Силиконовая смазка + смазка замков - {coast_mojka[19]} рублей \
+            \n🧹 Очистка колесных дисков (1 колесо) - {coast_mojka[20]} рублей \
+            \n🧹 Чернение резины - {coast_mojka[21]} рублей \
+            \n💧 Стирка текстильных ковров (1 шт.) - {coast_mojka[22]} рублей \
+            \n💧 Мойка моторного отсека - {coast_mojka[23]} рублей \
+            \n💧 Мойка резиновых ковров - {coast_mojka[24]} рублей \
+            \n💧 Мойка колес (4 шт.) - {coast_mojka[25]} рублей", parse_mode="HTML")    # create_btn(get_price_wash([k for k in cars_service_types.get(callback.data).keys()][0]))
     elif callback.data in cars_service_polish_types.keys():
-        await callback.message.answer(text=f"Цены на услугу ПОЛИРОВКА {[v for v in cars_service_polish_types.get(callback.data).values()][0]}а", 
-                                      reply_markup=create_btn(get_price_polish([k for k in cars_service_polish_types.get(callback.data).keys()][0])))
+        coast_polish = get_price_polish([k for k in cars_service_polish_types.get(callback.data).keys()][0])
+        await callback.message.answer(text=f"<u>Цены 💰 на услугу <b>ПОЛИРОВКА {[v for v in cars_service_polish_types.get(callback.data).values()][0]}а</b> </u>\n \
+            \n💦 Полировка фар (1 фара) - {coast_polish[0]} рублей \
+            \n💦 Легкая полировка кузова (глянцевая) - {coast_polish[1]} рублей \
+            \n💦 Глубокая абразивная полировка кузова ЗМ - {coast_polish[2]} рублей \
+            \n💦 Полировка 1 элемента - {coast_polish[3]} рублей \
+            \n💦 Анти-дождь GLACO SOFT 99, (лоб. ст. + перед. ст.) - {coast_polish[4]} рублей \
+            \n💦 Анти-дождь GLACO SOFT 99, (все стекла) - {coast_polish[5]} рублей \
+            \n💦 Анти-дождь Aquapel, (полусфера) - {coast_polish[6]} рублей", parse_mode="HTML")
     elif callback.data in cars_service_dry_cleaner_types.keys():
         await callback.message.answer(text=f"Цены на услугу ХИМЧИСТКА {[v for v in cars_service_dry_cleaner_types.get(callback.data).values()][0]}а", 
                                       reply_markup=create_btn(get_price_dry_cleaner([k for k in cars_service_dry_cleaner_types.get(callback.data).keys()][0])))
@@ -159,6 +192,39 @@ async def get_services_wash_car(callback: types.CallbackQuery):
                                 \nТакая подготовка включает в себя целый комплекс действий, которые при незначительных денежных затратах могут повысить рыночную стоимость вашей машины. \
                                 \nПредпродажная подготовка – цена от 10 000 рублей.", parse_mode="HTML",
                                 reply_markup=create_btn_liquid_glass("ПРЕДПРОДАЖНАЯ ПОДГОТОВКА", 10000, "presale_back"))
+        
+
+# @dp.callback_query_handler()
+# async def get_services_wash_car(callback: types.CallbackQuery):    
+#     if callback.data in cars_types.keys():
+#         await callback.message.answer(text=f"Выберите услугу для {cars_types.get(callback.data)}а", 
+#                                       reply_markup=create_btn_mrkup_services(callback.data))
+#     elif callback.data in cars_service_types.keys():
+#         await callback.message.answer(text=f"Цены на услугу МОЙКА {[v for v in cars_service_types.get(callback.data).values()][0]}а", 
+#                                       reply_markup=create_btn(get_price_wash([k for k in cars_service_types.get(callback.data).keys()][0])))
+#     elif callback.data in cars_service_polish_types.keys():
+#         await callback.message.answer(text=f"Цены на услугу ПОЛИРОВКА {[v for v in cars_service_polish_types.get(callback.data).values()][0]}а", 
+#                                       reply_markup=create_btn(get_price_polish([k for k in cars_service_polish_types.get(callback.data).keys()][0])))
+#     elif callback.data in cars_service_dry_cleaner_types.keys():
+#         await callback.message.answer(text=f"Цены на услугу ХИМЧИСТКА {[v for v in cars_service_dry_cleaner_types.get(callback.data).values()][0]}а", 
+#                                       reply_markup=create_btn(get_price_dry_cleaner([k for k in cars_service_dry_cleaner_types.get(callback.data).keys()][0])))
+#     elif callback.data in cars_service_prot_cover_types.keys():
+#         await callback.message.answer(text=f"Цены на услугу ЗАЩИТНЫЕ ПОКРЫТИЯ {[v for v in cars_service_prot_cover_types.get(callback.data).values()][0]}а", 
+#                                       reply_markup=create_btn(get_price_prot_cover([k for k in cars_service_prot_cover_types.get(callback.data).keys()][0])))
+#     elif callback.data == "liq_glass":
+#         await callback.message.answer(text=f"Жидкое стекло. \
+#                                 \nПокрытие кузова жидким стеклом H-7 Glass Coating (SOFT99, Япония) – цена от {get_price_liquid_glass(3)} рублей.\
+#                                 \nH7 жидкое стекло для автомобиля обеспечивает надежную защиту кузова от различных воздействий внешней среды: \
+#                                 \nосадков (дождя, снега, града), грязи, морской воды, экстремальных перемен температуры, а так же абразивного воздействия.", parse_mode="HTML",
+#                                 reply_markup=create_btn_liquid_glass("ЖИДКОЕ СТЕКЛО", get_price_liquid_glass(3), "liquid_glass"))
+#     elif callback.data == "presale":
+#         await callback.message.answer(text=f"Предпродажная подготовка.\
+#                                 \nСпециалисты нашей компании проведут предпродажную подготовку Вашего автомобиля на высочайшем уровне уже сегодня так, \
+#                                 \nчто завтра у Вас не будет отбоя от покупателей! \
+#                                 \nЕсли вы решили продать свой автомобиль, ему необходимо придать товарный вид – провести предпродажную подготовку. \
+#                                 \nТакая подготовка включает в себя целый комплекс действий, которые при незначительных денежных затратах могут повысить рыночную стоимость вашей машины. \
+#                                 \nПредпродажная подготовка – цена от 10 000 рублей.", parse_mode="HTML",
+#                                 reply_markup=create_btn_liquid_glass("ПРЕДПРОДАЖНАЯ ПОДГОТОВКА", 10000, "presale_back"))
 
 
 @dp.message_handler(commands=['quit'])
