@@ -11,7 +11,8 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemo
 welcome_mrkup = InlineKeyboardMarkup(row_width=2)
 welcome_price = InlineKeyboardButton(text="Цены на услуги", callback_data="car_mrkup")
 welcome_wash = InlineKeyboardButton(text="Записаться", callback_data="go_wash")
-welcome_mrkup.add(welcome_price, welcome_wash)
+welcome_qr = InlineKeyboardButton(text="QR-code", callback_data="qr_code")
+welcome_mrkup.add(welcome_price, welcome_wash, welcome_qr)
 
 #Категория автомобиля
 car_mrkup = InlineKeyboardMarkup(row_width=1)

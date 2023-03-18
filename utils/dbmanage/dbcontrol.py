@@ -21,6 +21,15 @@ def client_exists(user_tg_id: int) -> bool:
     except Exception as ex:
         logger.exception('error in searching for an existing user in the database', ex)
         
+def get_name_client(user_name: str):
+    """Get client name"""
+    try:
+        query = Clients.select().where(Clients.user_name == user_name).get()
+    except:
+        logger.exception('user not found')
+    return query
+
+
 
 def delete_client(user_tg_id: int) -> None:
     """delete user from db"""
