@@ -37,7 +37,8 @@ async def send_photo_file_id(message: Message):
     #декодируем qr-code
     detector = cv2.QRCodeDetector()
     data, bbox, straight_qrcode = detector.detectAndDecode(open_cv_image)
-    #print(data)
+    print(data)
+    print(bbox)
     
     if data == "":
         message_adm = "Ошибка QR-code. Попробуйте еще раз."
