@@ -9,24 +9,10 @@ from loader import dp, bot
 import os
 from datetime import date
 
-
-
 from dotenv import load_dotenv, find_dotenv
 import base64
 import qrcode
 from qrcode.image.pure import PyPNGImage
-
-
-
-
-
-'''
-@dp.message_handler(text='/photo')
-async def send_photo(message: Message):
-    chat_id = message.from_user.id
-    photo_file_id = 'AgACAgIAAxkBAAIHPmQM2gHzOytFDas1upT7Lj-8ElJbAAIsxzEbUL9oSL2yUcWqtICzAQADAgADbQADLwQ'
-    await dp.bot.send_photo(chat_id=chat_id, photo=photo_file_id)
-'''
 
 
 @dp.message_handler(commands=['start'])
