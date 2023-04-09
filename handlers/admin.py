@@ -21,23 +21,30 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 
-ADMIN = 000000000 #Твой личный ID узнать можно здесь https://t.me/getmyid_arel_bot
+ADMIN = 5130842598 #Твой личный ID узнать можно здесь https://t.me/getmyid_arel_bot
 
 print("Admin")
+
+async def is_admin(user_id):
+    return user_id == ADMIN
 
 class dialog(StatesGroup):
     waiting_for_news = State()
     waiting_for_confirmation = State()
     qr = State()
 
-@dp.message_handler(commands=['start'])
+@dp.message_handler(commands=['admin'])
 async def admin_command(message: Message):
-    await message.reply("Привет! Вы находитесь а административной панели!")
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    button1 = KeyboardButton('Сканировать QR-code')
-    button2 = KeyboardButton('Рассылка')
-    keyboard.add(button1, button2)
-    await message.answer('Выберите действие:', reply_markup=keyboard)
+    if await is_admin(message.from_user.id):
+        await message.reply("Привет! Вы находитесь а административной панели!")
+        keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
+        button1 = KeyboardButton('Сканировать QR-code')
+        button2 = KeyboardButton('Рассылка')
+        keyboard.add(button1, button2)
+        await message.answer('Выберите действие:', reply_markup=keyboard)
+    else:
+        await bot.send_message(chat_id=message.chat.id,
+                               text="Вы не авторизованы для доступа к этой панели.")
 
 
 @dp.message_handler(commands=['cancel'], state='*')
